@@ -1,12 +1,15 @@
 import serial # импрорт библиотеки pyserial
 import time # импрорт библиотеки time
 import serial.tools.list_ports # импрорт модуля list_ports библиотеки pyserial
-speeds = ['1200','2400', '4800', '9600', '19200', '38400', '57600', '115200'] # создание списка скоростей
-ports = [p.device for p in serial.tools.list_ports.comports()]
+speeds = ['1200','2400', '4800', '9600', '19200', '38400', '57600', '115200'] # создание списка скоростей в бодах
+ports = [p.device for p in serial.tools.list_ports.comports()] # создание списка используемых последовательных портов
 port_name = ports[0] # инициализациия переменной port_name с первым элементом в списке ports
 port_speed = int(speeds[-1]) # инициализация переменной port_speed с последним элементом в списке speeds
 port_timeout = 10 # инициализация переменной port_timeout со значением 10
-ard = serial.Serial(port_name, port_speed, timeout = port_timeout)
+ard = serial.Serial(port_name, port_speed, timeout = port_timeout) # создание объекта ard класса Serial c параметрами port_
+# параметр port_name передает название последовательного порта
+# параметр port_speed передает скорость передачи в бодах
+# параметр port_timeout устанавливает таймаут, после которого будут возвращены все байты полученные до этого момента
 time.sleep(1) # устанавлиет задержку выполнения кода на x секунд
 ard.flushInput() # очищает входной буфер и удаляет все его содержимое
 try: # начало блока обработчика исключения
